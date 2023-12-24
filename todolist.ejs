@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDoList</title>
+    <link rel="stylesheet" href="/css/todo.css">
+</head>
+<body>
+    <h1>Hello <%=USER%></h1>
+    <% if(DATA.length!==0){ %>
+        <p>Your ToDo lists:</p>
+           <% for(i=0 ; i < DATA.length ; i++ ) { %>
+            <div class="flex">
+                <form action="/<%=USER%>/<%=DATA[i].list_name%>" method="get">
+                    <button><%=DATA[i].list_name%></button> 
+                </form>
+                <form action="/DelList" method="post">
+                    <input type="hidden" name="List_name" value="<%=DATA[i].list_name%>">
+                    <input type="hidden" name="Client_name" value="<%=USER%>">
+                    <button class="img-del" type="submit"><img src="/img/trash.png" alt=""></button>
+                </form>
+            </div>
+           
+        <% } %>
+    <%} else { %>
+        <p>No lists</p>
+     <%}%>
+     <form action="/<%=USER%>" method="post">
+        <label>add a list:</label><br>
+        <input type="text" name="List_name" placeholder="list name">
+        <button type="submit">add</button>
+    </form>
+    <form action="/logout" method="post">
+        <button type="submit">Logout</button>
+    </form>
+    
+</body>
+</html>

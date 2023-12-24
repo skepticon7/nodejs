@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    
+    <title><%=FOUNDLIST.list_name%></title>
+   
+</head>
+<body>
+    <h1><%=FOUNDLIST.list_name%></h1>
+    <% for(i=0 ; i < FOUNDLIST.tasks.length ; i++ ) { %>
+        <div class="task">
+            <input type="checkbox" name="checkbox" value="<%=FOUNDLIST.tasks[i]%>" id="checkbtn">
+            <p><%=FOUNDLIST.tasks[i]%></p> 
+            <ul class="options" id="options-nav">
+                <form action="/edit" method="post">
+                    <input type="hidden" name="Client_id" value="<%=FOUNDLIST._id%>">
+                    <input type="hidden" name="List_name" value="<%=FOUNDLIST.list_name%>">
+                    <input type="hidden" name="Client_task" value="<%=FOUNDLIST.tasks[i]%>">
+                    <li><button type="submit">Edit</button></li>
+                </form>
+                <form action="/delete" method="post">
+                    <input type="hidden" name="Client_id" value="<%=FOUNDLIST._id%>">
+                    <input type="hidden" name="List_name" value="<%=FOUNDLIST.list_name%>">
+                    <input type="hidden" name="Client_task" value="<%=FOUNDLIST.tasks[i]%>">
+                    <input type="hidden" name="Client_name" value="<%=FOUNDLIST.username%>">
+                    <li><button type="submit">Delete</button></li>
+                </form>
+            </ul>
+            <div class="down" id="down-arrow">
+                <img src="/img/down-arrow.png" alt="">
+            </div>
+            <div class="up" id="up-arrow">
+                <img src="/img/upload.png" alt="">
+            </div>
+        </div>
+    <% } %>
+    <form action="/<%=FOUNDLIST.username%>/<%=FOUNDLIST.list_name%>" method="post">
+        <input type="text" placeholder="add task" name="task">
+        <button type="submit">add</button>
+    </form>
+    <style src="/js/main.js"></style>
+</body>
+</html>
